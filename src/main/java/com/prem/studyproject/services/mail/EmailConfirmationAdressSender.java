@@ -6,7 +6,7 @@ import com.prem.studyproject.domain.model.User;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmailConfirmationAdressSenderService {
+public class EmailConfirmationAdressSender {
 
     public void send(User user, EmailConfirmationToken token) {
         System.out.println(user + "\n" + token);

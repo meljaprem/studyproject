@@ -10,4 +10,6 @@ public interface TokenRepository extends MongoRepository<EmailConfirmationToken,
 
     EmailConfirmationToken findByUserId(BigInteger userId);
 
+    EmailConfirmationToken findByValue(String  value);
+
 }

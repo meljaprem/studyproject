@@ -77,8 +77,22 @@ public class RegistrationService {
         } else {
             token.setValue(UUID.randomUUID().toString());
             token.setCreationTime(LocalDateTime.now());
+            token.setActive(true);
         }
         return tokenRepository.save(token);
+    }
+
+    public User confirmToken(String tokenValue) {
+        User user = null;
+        EmailConfirmationToken token = tokenRepository.findByValue(tokenValue);
+        if (token != null && token.isActive()) {
+            token.setActive(false);
+            tokenRepository.save(token);
+            user = userRepository.findFirstById(token.getUserId());
+            user.setEnabled(true);
+            userRepository.save(user);
+        }
+        return user;
     }
 
     private EmailConfirmationToken generateToken(User user) {

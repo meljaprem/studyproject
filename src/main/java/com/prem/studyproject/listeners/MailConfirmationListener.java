@@ -5,7 +5,7 @@ import com.prem.studyproject.domain.model.EmailConfirmationToken;
 import com.prem.studyproject.domain.model.User;
 import com.prem.studyproject.listeners.events.RegistrationUserEvent;
 import com.prem.studyproject.services.RegistrationService;
-import com.prem.studyproject.services.mail.EmailConfirmationAdressSenderService;
+import com.prem.studyproject.services.mail.EmailConfirmationAdressSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -13,11 +13,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class MailConfirmationListener {
 
-    private EmailConfirmationAdressSenderService confirmationAdressSenderService;
+    private EmailConfirmationAdressSender confirmationAdressSenderService;
     private RegistrationService registrationService;
 
     @Autowired
-    public MailConfirmationListener(EmailConfirmationAdressSenderService confirmationAdressSenderService, RegistrationService registrationService) {
+    public MailConfirmationListener(EmailConfirmationAdressSender confirmationAdressSenderService, RegistrationService registrationService) {
         this.confirmationAdressSenderService = confirmationAdressSenderService;
         this.registrationService = registrationService;
     }

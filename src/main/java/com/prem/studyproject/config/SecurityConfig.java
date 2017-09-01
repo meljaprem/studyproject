@@ -17,7 +17,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/hello.txt", "/", "/registration").permitAll()
+                .antMatchers("/hello.txt", "/", "/registration/*").permitAll()
                 .antMatchers("/admin").hasAnyAuthority(com.prem.studyproject.domain.enums.Role.ADMIN.getAuthority())
                 .anyRequest().authenticated()
                 .and()
