@@ -56,13 +56,17 @@ public class MainController {
     public String confirmEmail(Map<String, Object> model, Authentication authentication,
                                @PathVariable(required = true) String token) {
         User user = registrationService.confirmToken(token);
-//        authentication.setAuthenticated(true);
         if (user != null) {
             return "User " + user.getUsername() + " were succesfully activated";
         } else {
             return "Invalid token";
         }
-//        return "redirect:/";
+    }
+
+
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String restore(Map<String, Object> model) {
+        return "registration";
     }
 
 

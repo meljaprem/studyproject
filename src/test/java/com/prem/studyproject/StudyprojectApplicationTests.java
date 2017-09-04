@@ -60,7 +60,7 @@ public class StudyprojectApplicationTests {
                         .surname("Melnyk")
                         .password("123")
                         .username("prem" + (int) ((Math.random() * 10000)) + 1)
-                        .email("asdaw@asda.ua" + (int) ((Math.random() * 100000)) + 1)
+                        .email("Gasdadima@gmail.com")
                         .build()
         );
         User registratedUser = registrationService.registerNewUser(user);

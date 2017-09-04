@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Builder
 @Document(collection = "tokens")
 @ToString
-public class EmailConfirmationToken {
+public class MailConfirmationToken {
     @Id
     private BigInteger id;
     @Indexed(unique = true)

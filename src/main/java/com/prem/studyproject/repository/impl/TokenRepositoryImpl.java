@@ -1,13 +1,9 @@
 package com.prem.studyproject.repository.impl;
 
-import com.mongodb.WriteResult;
-import com.prem.studyproject.domain.model.EmailConfirmationToken;
+import com.prem.studyproject.domain.model.MailConfirmationToken;
 import com.prem.studyproject.repository.interfaces.custom.TokenRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.query.CriteriaDefinition;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigInteger;
@@ -23,10 +19,10 @@ public class TokenRepositoryImpl implements TokenRepositoryCustom {
     }
 
     @Override
-    public BigInteger updateTokenValue(EmailConfirmationToken token) {
+    public BigInteger updateTokenValue(MailConfirmationToken token) {
 //        Query query = Query.query();
 //        Update update = Update.update("value", token.getValue());
-//        WriteResult result =  template.updateFirst(query, update, EmailConfirmationToken.class);
+//        WriteResult result =  template.updateFirst(query, update, MailConfirmationToken.class);
 //        result.
         return null;
     }

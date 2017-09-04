@@ -1,7 +1,7 @@
 package com.prem.studyproject.services;
 
 import com.prem.studyproject.domain.enums.Role;
-import com.prem.studyproject.domain.model.EmailConfirmationToken;
+import com.prem.studyproject.domain.model.MailConfirmationToken;
 import com.prem.studyproject.domain.model.User;
 import com.prem.studyproject.listeners.events.RegistrationUserEvent;
 import com.prem.studyproject.repository.interfaces.TokenRepository;
@@ -70,8 +70,8 @@ public class RegistrationService {
         return userRepository.save(user);
     }
 
-    public EmailConfirmationToken getToken(User user) {
-        EmailConfirmationToken token = tokenRepository.findByUserId(user.getId());
+    public MailConfirmationToken getToken(User user) {
+        MailConfirmationToken token = tokenRepository.findByUserId(user.getId());
         if (token == null) {
             token = generateToken(user);
         } else {
@@ -84,7 +84,7 @@ public class RegistrationService {
 
     public User confirmToken(String tokenValue) {
         User user = null;
-        EmailConfirmationToken token = tokenRepository.findByValue(tokenValue);
+        MailConfirmationToken token = tokenRepository.findByValue(tokenValue);
         if (token != null && token.isActive()) {
             token.setActive(false);
             tokenRepository.save(token);
@@ -95,8 +95,8 @@ public class RegistrationService {
         return user;
     }
 
-    private EmailConfirmationToken generateToken(User user) {
-        EmailConfirmationToken token = new EmailConfirmationToken();
+    private MailConfirmationToken generateToken(User user) {
+        MailConfirmationToken token = new MailConfirmationToken();
         String value = UUID.randomUUID().toString();
         token.setActive(true);
         token.setUserId(user.getId());

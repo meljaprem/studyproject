@@ -1,9 +1,9 @@
 package com.prem.studyproject.repository.interfaces.custom;
 
-import com.prem.studyproject.domain.model.EmailConfirmationToken;
+import com.prem.studyproject.domain.model.MailConfirmationToken;
 
 import java.math.BigInteger;
 
 public interface TokenRepositoryCustom {
-    BigInteger updateTokenValue(EmailConfirmationToken token);
+    BigInteger updateTokenValue(MailConfirmationToken token);
 }

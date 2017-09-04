@@ -1,6 +1,7 @@
 package com.prem.studyproject.config;
 
 
+import com.prem.studyproject.domain.enums.Role;
 import com.prem.studyproject.services.security.UserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +18,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/hello.txt", "/", "/registration/*").permitAll()
-                .antMatchers("/admin").hasAnyAuthority(com.prem.studyproject.domain.enums.Role.ADMIN.getAuthority())
+                .antMatchers("/hello.txt",
+                        "/",
+                        "/registration/*",
+                        "/css/*",
+                        "/js/*",
+                        "/fonts/*").permitAll()
+                .antMatchers("/admin").hasAnyAuthority(Role.ADMIN.getAuthority())
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()
@@ -29,6 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     protected void configure(AuthenticationManagerBuilder auth, UserSecurityService userSecurityService) throws Exception {
-        auth.userDetailsService(userSecurityService).passwordEncoder(new BCryptPasswordEncoder());
+        auth
+                .userDetailsService(userSecurityService)
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
 }
