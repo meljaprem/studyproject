@@ -8,10 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,9 +32,22 @@ public class MainController {
         return "main";
     }
 
-    @RequestMapping("/admin")
-    public String getAdmin(Map<String, Object> model, Authentication authentication) {
-        return "admin";
+    @RequestMapping("/login")
+    public String getLogin(@RequestParam(required = false) String error,
+                           @RequestParam(required = false) String logout,
+                           @RequestParam(required = false) String msg,
+                           Model model
+                           ) {
+        if(msg!=null){
+            model.addAttribute("msg", msg);
+        }
+        if(error!=null){
+            model.addAttribute("error", error);
+        }
+        if(logout!=null){
+            model.addAttribute("logout", logout);
+        }
+        return "login";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -50,6 +62,18 @@ public class MainController {
     public String registration(Map<String, Object> model) {
         return "registration";
     }
+
+
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public ModelAndView registrationPost(ModelAndView model, User user) {
+        User registeredUser = registrationService.registerNewUser(user);
+        System.out.println("In registration POST");
+        model.addObject("user", registeredUser);
+        model.addObject("message", "check your email for confirmation of registration! \n Email: " + user.getEmail());
+        model.setViewName("message");
+       return model;
+    }
+
 
     @RequestMapping(value = "/registration/{token}", method = RequestMethod.GET)
     @ResponseBody

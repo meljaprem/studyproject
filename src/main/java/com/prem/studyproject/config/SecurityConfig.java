@@ -18,16 +18,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/hello.txt",
-                        "/",
-                        "/registration/*",
-                        "/css/*",
-                        "/js/*",
-                        "/fonts/*").permitAll()
+                .antMatchers("/security.tld",
+                        "/registration**",
+                        "/css/**",
+                        "/js/**",
+                        "/spring/**",
+                        "/fonts/**").permitAll()
                 .antMatchers("/admin").hasAnyAuthority(Role.ADMIN.getAuthority())
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().permitAll()
+                .formLogin().loginPage("/login").usernameParameter("login").passwordParameter("password").permitAll()
+                .defaultSuccessUrl("/")
+                .failureUrl("/login?error")
                 .and()
                 .csrf().disable()
                 .logout().permitAll();

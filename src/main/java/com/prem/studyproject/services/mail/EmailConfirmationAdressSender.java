@@ -7,21 +7,14 @@ import com.prem.studyproject.domain.model.User;
 import com.prem.studyproject.helpers.MailBuilder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMailMessage;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.internet.*;
-import java.util.Date;
+import javax.mail.internet.MimeMessage;
 import java.util.Map;
 
 
@@ -44,7 +37,7 @@ public class EmailConfirmationAdressSender extends MailSender {
     }
 
     @Override
-//    @Async
+    @Async
     public void send(Map<String, Object> values) throws MessagingException {
         log.debug("send() method invoke. Values : {}", values);
         if (!values.isEmpty() && values.containsKey("user") && values.containsKey("token")) {
