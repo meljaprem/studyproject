@@ -64,10 +64,6 @@ public class MainController {
     }
 
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String restore(Map<String, Object> model) {
-        return "registration";
-    }
 
 
 }

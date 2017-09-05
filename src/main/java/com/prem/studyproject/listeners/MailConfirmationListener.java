@@ -6,15 +6,18 @@ import com.prem.studyproject.domain.model.User;
 import com.prem.studyproject.listeners.events.RegistrationUserEvent;
 import com.prem.studyproject.services.RegistrationService;
 import com.prem.studyproject.services.mail.MailSender;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import javax.mail.MessagingException;
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@Slf4j
 public class MailConfirmationListener {
 
     private MailSender confirmationAdressSender;
@@ -34,6 +37,10 @@ public class MailConfirmationListener {
         Map<String, Object> values = new HashMap<>();
         values.put("user", user);
         values.put("token", token);
-        confirmationAdressSender.send(values);
+        try {
+            confirmationAdressSender.send(values);
+        } catch (MessagingException e) {
+            log.error("Error while sending email message", e);
+        }
     }
 }

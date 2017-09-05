@@ -2,10 +2,17 @@ package com.prem.studyproject.services.mail;
 
 import com.prem.studyproject.domain.enums.TemplateType;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,7 +25,13 @@ import java.util.Map;
 @Slf4j
 public abstract class MailSender {
 
+    protected JavaMailSender sender;
     private static final String FOLDER = "mailTemplates";
+
+    @Autowired
+    public MailSender(JavaMailSender sender) {
+        this.sender = sender;
+    }
 
     public String getTemplate(TemplateType type) {
         log.debug("getTemplate method invoke : TemplateType : {}, FOLDER : {} ", type, FOLDER);
@@ -44,6 +57,5 @@ public abstract class MailSender {
         return stringTemplate;
     }
 
-    @Async
-    public abstract void send(Map<String, Object> values);
+    public abstract void send(Map<String, Object> values) throws MessagingException;
 }

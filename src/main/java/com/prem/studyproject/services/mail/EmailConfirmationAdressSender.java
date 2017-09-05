@@ -4,6 +4,7 @@ package com.prem.studyproject.services.mail;
 import com.prem.studyproject.domain.enums.TemplateType;
 import com.prem.studyproject.domain.model.MailConfirmationToken;
 import com.prem.studyproject.domain.model.User;
+import com.prem.studyproject.helpers.MailBuilder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMailMessage;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.*;
+import java.util.Date;
 import java.util.Map;
 
 
@@ -30,26 +37,26 @@ public class EmailConfirmationAdressSender extends MailSender {
     private static final String NAME_TMPL = "%name%";
     private static final String SURNAME_TMPL = "%surname%";
 
-    private org.springframework.mail.MailSender sender;
     private String subject;
 
-//    @Autowired
-//    public EmailConfirmationAdressSender(org.springframework.mail.MailSender sender) {
-//        this.sender = sender;
-//    }
+    public EmailConfirmationAdressSender(JavaMailSender sender) {
+        super(sender);
+    }
 
     @Override
-    public void send(Map<String, Object> values) {
+//    @Async
+    public void send(Map<String, Object> values) throws MessagingException {
         log.debug("send() method invoke. Values : {}", values);
         if (!values.isEmpty() && values.containsKey("user") && values.containsKey("token")) {
             String temaplate = getTemplate(TemplateType.REG_TOKEN);
             User user = (User) values.get("user");
             MailConfirmationToken token = (MailConfirmationToken) values.get("token");
             String body = replaceAll(temaplate, token, user);
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setTo(user.getEmail());
-            message.setText(body);
-            message.setSubject(subject);
+            MailBuilder builder = new MailBuilder(sender);
+            builder.setTO(user.getEmail())
+                    .setSubject(subject)
+                    .setText(body);
+            MimeMessage message = builder.generateMimeMessage();
             log.debug("Sending message");
             sender.send(message);
         } else {

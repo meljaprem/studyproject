@@ -2,10 +2,13 @@ package com.prem.studyproject.config;
 
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.ServerAddress;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,15 +24,19 @@ import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 @ToString
 @ConfigurationProperties("mongodb")
 @PropertySource("classpath:application.properties")
+@Slf4j
 public class MongoConfig {
     private String host;
     private Integer port;
     private String user;
     private String pass;
+    private String database;
 
     public @Bean
     MongoDbFactory mongoDbFactory() throws Exception {
-        return new SimpleMongoDbFactory(new MongoClient(host, port), "study_project");
+        MongoClientURI uri = new MongoClientURI("mongodb://"+user+":"+pass+"@"+host+":"+port+"/"+database);
+        log.info("Connected to MongoDB URI: " + uri.toString());
+        return new SimpleMongoDbFactory(uri);
     }
 
     public @Bean
