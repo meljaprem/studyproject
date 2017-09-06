@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="css/style-form.css">
+    <link rel="stylesheet" href="css/style-login.css">
     <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
@@ -9,6 +9,8 @@
 
 <div class="container">
     <div class="section">
+        <div class="message">
+        </div>
         <div class="login">
             <h1>Log in</h1>
             <form method="post" action="/login">
@@ -22,15 +24,6 @@
                     <input id="password" name="password" type="password" class="validate">
                     <label for="password">Password</label>
                 </div>
-            <#if error??>
-                Invalid username or pass
-            </#if>
-            <#if msg?? >
-            ${msg}
-            </#if>
-            <#if logout?? >
-                you successfully logout
-            </#if>
                 <p class="submit"><input type="submit" name="login" value="Войти"></p>
             </form>
         </div>
@@ -42,6 +35,21 @@
     </div>
     <br><br>
 </div>
+<script>
+    $(document).ready(function(){
+    <#if error??>
+        Materialize.toast('Invalid username or pass', 3000, 'rounded');
+    </#if>
+    <#if msg?? >
+        Materialize.toast('${msg}', 3000, 'rounded');
+    </#if>
+    <#if logout?? >
+        Materialize.toast('u are loged out now', 3000, 'rounded');
+    </#if>
+    })
+
+</script>
+
 
 
 <#include "/common/footer.ftl">

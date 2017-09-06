@@ -87,6 +87,14 @@ body {
   background: rgba(0, 0, 0, 0.08);
   border-radius: 4px;
 }
+.message{
+  color: #ff4834;
+  background-color: #8c9eff;
+  margin: 20px;
+  position: absolute;
+  text-shadow: 0 1px #2a85a1;
+}
+
 .login h1 {
   margin: -20px -20px 21px;
   line-height: 40px;
@@ -256,3 +264,4 @@ input[type=submit]:active {
 	float: left;
 	display: block;
 }
+

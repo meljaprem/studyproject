@@ -65,6 +65,7 @@
        var ser =  $("#form-reg").serialize();
         $('#post_form').submit(function(){
             $.post("/registration", ser,  function(response) {
+
             });
         });
     });

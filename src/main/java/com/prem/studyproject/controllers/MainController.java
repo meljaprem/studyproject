@@ -36,8 +36,12 @@ public class MainController {
     public String getLogin(@RequestParam(required = false) String error,
                            @RequestParam(required = false) String logout,
                            @RequestParam(required = false) String msg,
-                           Model model
+                           Model model,
+                           Authentication authentication
                            ) {
+        if(authentication!=null) {
+            model.addAttribute("user", authentication.getPrincipal());
+        }
         if(msg!=null){
             model.addAttribute("msg", msg);
         }

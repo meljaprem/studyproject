@@ -1,4 +1,4 @@
-<footer class="page-footer orange">
+<footer class="page-footer light-blue">
     <div class="container">
         <div class="row">
             <div class="col l6 s12">
@@ -34,10 +34,5 @@
     </div>
 </footer>
 
-
-<!--  Scripts-->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="js/materialize.js"></script>
-<script src="js/init.js"></script>
 
 </body>
