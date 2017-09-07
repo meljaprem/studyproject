@@ -42,7 +42,7 @@ public class MongoConfig {
     }
 
 
-    @Profile("home")
+    @Profile({"home","work"})
     public @Bean
     MongoDbFactory mongoDbFactory2() throws Exception {
         MongoClientURI uri = new MongoClientURI("mongodb://" + user + ":" + pass + "@" + host + ":" + port + "/" + database);
