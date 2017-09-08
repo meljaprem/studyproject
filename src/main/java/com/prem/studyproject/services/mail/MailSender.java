@@ -27,7 +27,7 @@ import java.util.Map;
 public abstract class MailSender {
 
     protected JavaMailSender sender;
-    private static final String FOLDER = "public/mailTemplates";
+    private static final String FOLDER = "mailTemplates";
 
     @Autowired
     public MailSender(JavaMailSender sender) {
@@ -42,7 +42,7 @@ public abstract class MailSender {
         log.debug("Template path: {}", path);
         StringBuilder stringBuilder = new StringBuilder();
         String stringTemplate = "";
-        if (temaplateFile.exists()) {
+//        if (temaplateFile.exists()) {
             try {
                 List<String> lines = Files.readAllLines(Paths.get(temaplateFile.getCanonicalPath()));
                 for (String line : lines) {
@@ -52,9 +52,9 @@ public abstract class MailSender {
                 log.error("Error while reading file", e);
             }
             stringTemplate = stringBuilder.toString();
-        } else {
-            throw new IllegalStateException("Template file not found");
-        }
+//        } else {
+//            throw new IllegalStateException("Template file not found");
+//        }
         return stringTemplate;
     }
 
