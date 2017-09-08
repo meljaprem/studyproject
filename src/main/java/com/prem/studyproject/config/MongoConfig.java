@@ -3,6 +3,7 @@ package com.prem.studyproject.config;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import com.mongodb.MongoCredential;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,6 +36,7 @@ public class MongoConfig {
 
     public @Bean
     MongoDbFactory mongoDbFactory2() throws Exception {
+        this.toString();
         String prefix = "mongodb://";
         String connectionURI = host + ":" + port + "/" + database;
         String auth = user + ":" + pass + "@";
