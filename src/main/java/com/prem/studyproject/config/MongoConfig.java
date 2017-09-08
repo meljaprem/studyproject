@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDbFactory;
@@ -18,7 +19,6 @@ import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 @Data
 @NoArgsConstructor
 @ToString
-//@ConfigurationProperties("mongodb")
 @Slf4j
 public class MongoConfig {
     @Value("${DB_HOST}")
@@ -35,11 +35,6 @@ public class MongoConfig {
 
     public @Bean
     MongoDbFactory mongoDbFactory(
-//            @Value("${DB_HOST}") String host,
-//            @Value("${DB_PORT}") String port,
-//            @Value("${DB_USER}") String user,
-//            @Value("${DB_PASSWORD}") String pass,
-//            @Value("${DB_NAME}") String database
     ) throws Exception {
         String prefix = "mongodb://";
         String connectionURI = host + ":" + port + "/" + database;
@@ -60,4 +55,12 @@ public class MongoConfig {
         MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
         return mongoTemplate;
     }
+
+//    public  static @Bean
+//    PropertyPlaceholderConfigurer mongoPropertyPlaceholderConfigurer() throws Exception {
+//        PropertyPlaceholderConfigurer propertyPlaceholderConfigurer = new PropertyPlaceholderConfigurer();
+//        propertyPlaceholderConfigurer.setSearchSystemEnvironment(true);
+//        propertyPlaceholderConfigurer.setSystemPropertiesModeName("SYSTEM_PROPERTIES_MODE_OVERRIDE");
+//        return propertyPlaceholderConfigurer;
+//    }
 }
