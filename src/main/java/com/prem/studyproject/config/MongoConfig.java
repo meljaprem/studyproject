@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 
 @Configuration
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 @ToString
 //@ConfigurationProperties("mongodb")
 @Slf4j
@@ -41,7 +41,6 @@ public class MongoConfig {
 //            @Value("${DB_PASSWORD}") String pass,
 //            @Value("${DB_NAME}") String database
     ) throws Exception {
-        this.toString();
         String prefix = "mongodb://";
         String connectionURI = host + ":" + port + "/" + database;
         String auth = user + ":" + pass + "@";
