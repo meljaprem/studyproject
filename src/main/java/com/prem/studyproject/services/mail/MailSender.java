@@ -42,11 +42,11 @@ public abstract class MailSender {
     }
 
     public String getTemplate(TemplateType type) {
-        log.debug("getTemplate method invoke : TemplateType : {}, FOLDER : {} ", type, FOLDER);
+        log.debug("getTemplate method invoke : TemplateType : {}, FOLDER : {}, profile : {} ", type, FOLDER, profile);
         StringBuilder stringBuilder = new StringBuilder();
         if (profile.equals("prod")) {
             try {
-                Resource resource = new ClassPathResource(FOLDER);
+                Resource resource = new ClassPathResource(FOLDER + File.separator + type.toString().toLowerCase() + ".html");
                 BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream()), 1024);
                 String line;
                 while ((line = br.readLine()) != null) {
