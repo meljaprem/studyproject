@@ -62,7 +62,6 @@ public abstract class MailSender {
                     + File.separator + type.toString().toLowerCase() + ".html";
             File temaplateFile = new File(path);
             log.debug("Template path: {}", path);
-
             String stringTemplate = "";
             if (temaplateFile.exists()) {
                 try {
