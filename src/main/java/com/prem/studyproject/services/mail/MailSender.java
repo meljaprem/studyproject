@@ -27,7 +27,7 @@ import java.util.Map;
 public abstract class MailSender {
 
     protected JavaMailSender sender;
-    private static final String FOLDER = "public/mailTemplates";
+    private static final String FOLDER = "mailTemplates";
 
     @Autowired
     public MailSender(JavaMailSender sender) {
@@ -36,10 +36,12 @@ public abstract class MailSender {
 
     public String getTemplate(TemplateType type) {
         log.debug("getTemplate method invoke : TemplateType : {}, FOLDER : {} ", type, FOLDER);
-        String path = getClass().getClassLoader().getResource(FOLDER).getPath()
-                + File.separator + type.toString().toLowerCase() + ".html";
-        File temaplateFile = new File(path);
-        log.debug("Template path: {}", path);
+//        String path = getClass().getClassLoader().getResource(FOLDER).getPath()
+//                + File.separator + type.toString().toLowerCase() + ".html";
+//        File temaplateFile = new File(path);
+//        log.debug("Template path: {}", path);
+
+                File temaplateFile = new File("./mailTemplates" + File.separator + type.toString().toLowerCase() + ".html");
         StringBuilder stringBuilder = new StringBuilder();
         String stringTemplate = "";
 //        if (temaplateFile.exists()) {
