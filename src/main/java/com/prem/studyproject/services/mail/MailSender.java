@@ -27,7 +27,7 @@ import java.util.Map;
 public abstract class MailSender {
 
     protected JavaMailSender sender;
-    private static final String FOLDER = "mailTemplates";
+    private static final String FOLDER = "public/mailTemplates";
 
     @Autowired
     public MailSender(JavaMailSender sender) {
