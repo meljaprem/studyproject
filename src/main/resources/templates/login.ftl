@@ -44,7 +44,7 @@
         Materialize.toast('${msg}', 3000, 'rounded');
     </#if>
     <#if logout?? >
-        Materialize.toast('u are loged out now', 3000, 'rounded');
+        Materialize.toast('You are loged out now', 3000, 'rounded');
     </#if>
     })
 

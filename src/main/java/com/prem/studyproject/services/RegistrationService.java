@@ -6,6 +6,7 @@ import com.prem.studyproject.domain.model.User;
 import com.prem.studyproject.listeners.events.RegistrationUserEvent;
 import com.prem.studyproject.repository.interfaces.TokenRepository;
 import com.prem.studyproject.repository.interfaces.UserRepository;
+import com.sun.istack.internal.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

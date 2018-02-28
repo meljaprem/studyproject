@@ -71,9 +71,8 @@ public class MainController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ModelAndView registrationPost(ModelAndView model, User user) {
         User registeredUser = registrationService.registerNewUser(user);
-        System.out.println("In registration POST");
         model.addObject("user", registeredUser);
-        model.addObject("message", "check your email for confirmation of registration! \n Email: " + user.getEmail());
+        model.addObject("message", "Check your email for confirmation of registration!" + System.lineSeparator() + "Email: " + user.getEmail());
         model.setViewName("message");
        return model;
     }
@@ -81,17 +80,15 @@ public class MainController {
 
     @RequestMapping(value = "/registration/{token}", method = RequestMethod.GET)
     @ResponseBody
-    public String confirmEmail(Map<String, Object> model, Authentication authentication,
+    public ModelAndView confirmEmail(ModelAndView model, Authentication authentication,
                                @PathVariable(required = true) String token) {
         User user = registrationService.confirmToken(token);
         if (user != null) {
-            return "User " + user.getUsername() + " were succesfully activated";
+            model.addObject("message", "User " + user.getUsername() + " were succesfully activated");
         } else {
-            return "Invalid token";
+            model.addObject("message", "Invalid token");
         }
+        model.setViewName("message");
+        return model;
     }
-
-
-
-
 }
