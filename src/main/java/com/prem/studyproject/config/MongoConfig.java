@@ -48,7 +48,6 @@ public class MongoConfig {
         return new SimpleMongoDbFactory(uri);
     }
 
-
     public @Bean
     MongoTemplate mongoTemplate() throws Exception {
         MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());

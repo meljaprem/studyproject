@@ -37,18 +37,17 @@ public class MainController {
                            @RequestParam(required = false) String logout,
                            @RequestParam(required = false) String msg,
                            Model model,
-                           Authentication authentication
-                           ) {
-        if(authentication!=null) {
+                           Authentication authentication) {
+        if (authentication != null) {
             model.addAttribute("user", authentication.getPrincipal());
         }
-        if(msg!=null){
+        if (msg != null) {
             model.addAttribute("msg", msg);
         }
-        if(error!=null){
+        if (error != null) {
             model.addAttribute("error", error);
         }
-        if(logout!=null){
+        if (logout != null) {
             model.addAttribute("logout", logout);
         }
         return "login";
@@ -72,16 +71,16 @@ public class MainController {
     public ModelAndView registrationPost(ModelAndView model, User user) {
         User registeredUser = registrationService.registerNewUser(user);
         model.addObject("user", registeredUser);
-        model.addObject("message", "Check your email for confirmation of registration!" + System.lineSeparator() + "Email: " + user.getEmail());
+        model.addObject("message", "Check your email for confirmation of registration!" + " <br> " + "Email: " + user.getEmail());
         model.setViewName("message");
-       return model;
+        return model;
     }
 
 
     @RequestMapping(value = "/registration/{token}", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView confirmEmail(ModelAndView model, Authentication authentication,
-                               @PathVariable(required = true) String token) {
+                                     @PathVariable(required = true) String token) {
         User user = registrationService.confirmToken(token);
         if (user != null) {
             model.addObject("message", "User " + user.getUsername() + " were succesfully activated");

@@ -1,15 +1,11 @@
 package com.prem.studyproject.services.security;
 
-import com.prem.studyproject.domain.enums.Role;
-import com.prem.studyproject.domain.model.User;
 import com.prem.studyproject.repository.interfaces.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 
 @Service
