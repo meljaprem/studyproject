@@ -60,7 +60,7 @@ public class EmailConfirmationAdressSender extends MailSender {
 
 
     private String replaceAll(String oldTemplate, MailConfirmationToken token, User user) {
-        log.debug("replaceAll method invoke. oldTemplate: {}, token : {}, user : {} ", oldTemplate, token, user);
+        log.trace("replaceAll method invoke. oldTemplate: {}, token : {}, user : {} ", oldTemplate, token, user);
         return oldTemplate
                 .replaceAll(USERNAME_TMPL, user.getUsername())
                 .replaceAll(TOKEN_TMPL, token.getValue())

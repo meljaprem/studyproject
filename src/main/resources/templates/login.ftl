@@ -1,3 +1,4 @@
+<util:properties id="myProperties" location="classpath:/messages.properties" />
 <html>
 <head>
     <title>Login</title>
@@ -38,13 +39,18 @@
 <script>
     $(document).ready(function(){
     <#if error??>
-        Materialize.toast('Invalid username or pass', 3000, 'rounded');
-    </#if>
-    <#if msg?? >
-        Materialize.toast('${msg}', 3000, 'rounded');
+        <#if error='locked'>
+            Materialize.toast('locked', 3000, 'rounded');
+        <#elseif error='deactivated'>
+            Materialize.toast('deactivated', 3000, 'rounded');
+        <#elseif error='wrong'>
+            Materialize.toast('wrong', 3000, 'rounded');
+        <#else>
+            Materialize.toast('default', 3000, 'rounded');
+        </#if>
     </#if>
     <#if logout?? >
-        Materialize.toast('You are loged out now', 3000, 'rounded');
+        Materialize.toast('${logout.successful}', 3000, 'rounded');
     </#if>
     })
 
